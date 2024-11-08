@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Board List</h2>
+
+    <!-- 테이블 -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- boardList 변수에 있는 Board 객체 목록을 출력 -->
+        <tr th:each="board : ${boardList}">
+            <td th:text="${board.boardId}"></td>
+            <td th:text="${board.title}"></td>
+            <td th:text="${board.content}"></td>
+            <td>
+                <!-- 게시물 보기 링크 (상세보기 페이지로 이동) -->
+                <a th:href="@{/boards/{id}(id=${board.boardId})}" class="btn btn-info btn-sm">View</a>
+
+                <!-- 게시물 수정 링크 (수정 페이지로 이동) -->
+                <a th:href="@{/boards/{id}/edit(id=${board.boardId})}" class="btn btn-warning btn-sm">Edit</a>
+
+                <!-- 게시물 삭제 링크 (삭제를 위한 팝업을 띄우거나 삭제 기능 실행) -->
+                <a th:href="@{/boards/{id}/delete(id=${board.boardId})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this board?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 추가 버튼 -->
+    <a href="/boards/new" class="btn btn-primary">Create New Board</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
